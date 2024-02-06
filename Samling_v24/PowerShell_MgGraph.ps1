@@ -52,6 +52,14 @@ $User = New-MgUser -UserPrincipalName "per.person@edudev365.onmicrosoft.com" `
 
 
 
-# Edit Group
+# Find members in Group
 Get-Help Update-MgGroup -Online
-#
+Get-MgGroup
+Get-MgGroup -Filter "startswith(displayName,'grp')"
+$Group = Get-MgGroup -Filter "displayName eq 'grp_demo'"
+$Group.Id
+$Group | Get-Member -MemberType Property
+Get-MgGroupMember -GroupId $Group.Id
+(Get-MgGroupMember -GroupID $Group.Id).AdditionalProperties.userPrincipalName
+
+
