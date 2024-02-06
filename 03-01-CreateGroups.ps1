@@ -23,8 +23,8 @@ foreach ($department in $departments) {
     New-MgGroup @Params
 }
 
-
-
+# List group members - UserPrincipalName
+(Get-MgGroupMember -GroupID $Group.Id).AdditionalProperties.userPrincipalName
 
 
 
