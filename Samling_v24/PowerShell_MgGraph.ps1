@@ -23,8 +23,35 @@ $User | Update-MgUser -Department "HR"
 
 
 
-$User = Get-MgUser -Filter "displayName eq 'Hans Hansen'" -Property department,displayname,id,city,companyname,jobtitle
-Get-MgUser -Property department,displayname,id,city,companyname| Select-Object displayname,id,department,city,companyname | ft
-$User | Update-MgUser -Department "HR" -JobTitle "HR Manager"
-$User | Update-MgUser -Department "HR" -JobTitle "HR Manager" -City "Trondheim"
-$User | Update-MgUser -Department "HR" -JobTitle "HR Manager" -City "Trondheim" -Country "Norway"
+$User = Get-MgUser -Filter "displayName eq 'Hans Hansen'" -Property department,displayname,id,city,companyname,jobtitle,country
+Get-MgUser -Property department,displayname,id,city,companyname| Select-Object displayname,id,department,city,companyname,jobtitle | ft
+Update-MgUser -UserId $User.id -Department "HR" -JobTitle "HR Manager"
+$User | Select-object displayName, id, mail, userPrincipalName, department, jobtitle, city, country, companyname
+Update-MgUser -UserId $User.id -Department "HR" -JobTitle "HR Manager" -City "Trondheim"
+Update-MgUser -UserId $User.id -Department "HR" -JobTitle "HR Manager" -City "Trondheim" -Country "Norway"
+Update-MgUser -UserId $User.id -Department "HR" -JobTitle "HR Manager" -City "Trondheim" -Country "Norway" -CompanyName "Demo Company"
+
+
+# New User
+Get-Help New-MgUser -Online
+$PasswordProfile = @{
+    Password = 'DemoPassword12345!  '
+    }
+$User = New-MgUser -UserPrincipalName "per.person@edudev365.onmicrosoft.com" `
+                    -DisplayName "Per Person" `
+                    -MailNickName "per.person" `
+                    -PasswordProfile $PasswordProfile `
+                    -Department "IT" `
+                    -JobTitle "IT Manager" `
+                    -City "Trondheim" `
+                    -Country "Norway" `
+                    -CompanyName "Demo Company" `
+                    -AccountEnabled
+
+
+
+
+
+# Edit Group
+Get-Help Update-MgGroup -Online
+#
