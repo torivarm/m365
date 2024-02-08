@@ -1,11 +1,11 @@
-# $TenantID = "06bf9568-f5b8-4a8b-bef5-1f2291b53f76"
-# Connect-MgGraph -TenantId $TenantID -Scopes "User.ReadWrite.All", "Group.ReadWrite.All", "Directory.ReadWrite.All", "RoleManagement.ReadWrite.Directory"
+#$TenantID = "06bf9568-f5b8-4a8b-bef5-1f2291b53f76"
+#Connect-MgGraph -TenantId $TenantID -Scopes "User.ReadWrite.All", "Group.ReadWrite.All", "Directory.ReadWrite.All", "RoleManagement.ReadWrite.Directory"
 
 # Create users
 Get-Help New-MgUser -Online
 
 $PasswordProfile = @{
-    Password = 'DemoPassword12345!  '
+    Password = 'DemoPassword12345!'
     }
 
 $Params = @{
@@ -30,15 +30,15 @@ New-MgUser @Params
 $users = Import-CSV -Path '/Users/melling/git-projects/m365/03-02-Users.csv' -Delimiter ","
 
 $PasswordProfile = @{
-    Password = 'DemoPassword12345!  '
+    Password = 'DemoPassword12345!'
     }
 foreach ($user in $users) {
     $Params = @{
-        UserPrincipalName = $user.GivenName + "." + $user.Surname + "@edudev365.onmicrosoft.com"
-        DisplayName = $user.GivenName + " " + $user.Surname
+        UserPrincipalName = $user.givenName + "." + $user.surName + "@edudev365.onmicrosoft.com"
+        DisplayName = $user.givenName + " " + $user.surname
         GivenName = $user.GivenName
         Surname = $user.Surname
-        MailNickname = $user.GivenName + "." + $user.Surname
+        MailNickname = $user.givenName + "." + $user.surname
         AccountEnabled = $true
         PasswordProfile = $PasswordProfile
         Department = $user.Department
@@ -46,9 +46,10 @@ foreach ($user in $users) {
         Country = $user.Country
         City = $user.City
     }
-    
-    New-MgUser @Params
+    $Params
+    #New-MgUser @Params
 }
+
 
 
 $group = Get-MgGroup -Filter "displayName eq 'Support Team'"
