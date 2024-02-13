@@ -47,7 +47,7 @@ foreach ($user in $users) {
         City = $user.City
     }
     $Params
-    #New-MgUser @Params
+    New-MgUser @Params
 }
 
 

@@ -6,7 +6,7 @@ Get-Help New-MgGroup -Online
 
 # Create M365 Group for IT
 
-$departments = @("Sales", "Marketing", "Finance", "Support")
+$departments = @("HR", "IT", "Sales", "Marketing", "Finance", "Support")
 foreach ($department in $departments) {
     $membershiprule = "user.department -eq `"$department`""
     $Params = @{
