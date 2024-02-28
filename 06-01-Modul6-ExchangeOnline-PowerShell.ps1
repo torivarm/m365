@@ -10,7 +10,7 @@ Get-DistributionGroup | Select-Object DisplayName,PrimarySmtpAddress
 New-DistributionGroup -Name "" -DisplayName "" -PrimarySmtpAddress ""
 
 # https://docs.microsoft.com/en-us/powershell/module/exchange/add-distributiongroupmember?view=exchange-ps
-Add-DistributionGroupMember -Identity "" -Member "Hedda Hansen"
+Add-DistributionGroupMember -Identity "" -Member ""
 
 New-Mailbox -Shared -Name "" -DisplayName "" -PrimarySmtpAddress ""
 
