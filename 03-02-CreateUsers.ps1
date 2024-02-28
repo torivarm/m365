@@ -1,5 +1,5 @@
 #$TenantID = "06bf9568-f5b8-4a8b-bef5-1f2291b53f76"
-#Connect-MgGraph -TenantId $TenantID -Scopes "User.ReadWrite.All", "Group.ReadWrite.All", "Directory.ReadWrite.All", "RoleManagement.ReadWrite.Directory"
+Connect-MgGraph -TenantId $TenantID -Scopes "User.ReadWrite.All", "Group.ReadWrite.All", "Directory.ReadWrite.All", "RoleManagement.ReadWrite.Directory"
 
 # Create users
 Get-Help New-MgUser -Online
