@@ -24,6 +24,7 @@ foreach ($department in $departments) {
 }
 
 # List group members - UserPrincipalName
+$group = Get-MgGroup -Filter "displayName eq 'HR Team'"
 (Get-MgGroupMember -GroupID $Group.Id).AdditionalProperties.userPrincipalName
 
 
