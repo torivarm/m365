@@ -27,14 +27,14 @@ New-MgUser @Params
 
 
 
-$users = Import-CSV -Path '/Users/melling/git-projects/m365/03-02-Users.csv' -Delimiter ","
+$users = Import-CSV -Path '03-02-Users.csv' -Delimiter ","
 
 $PasswordProfile = @{
     Password = 'DemoPassword12345!'
     }
 foreach ($user in $users) {
     $Params = @{
-        UserPrincipalName = $user.givenName + "." + $user.surName + "@edudev365.onmicrosoft.com"
+        UserPrincipalName = $user.givenName + "." + $user.surName + "@minundervisning.onmicrosoft.com"
         DisplayName = $user.givenName + " " + $user.surname
         GivenName = $user.GivenName
         Surname = $user.Surname
@@ -52,5 +52,5 @@ foreach ($user in $users) {
 
 
 
-$group = Get-MgGroup -Filter "displayName eq 'Support Team'"
+$group = Get-MgGroup -Filter "displayName eq 'HR Team'"
 (Get-MgGroupMember -GroupID $Group.Id).AdditionalProperties.userPrincipalName
