@@ -1,4 +1,4 @@
-#$TenantID = "06bf9568-f5b8-4a8b-bef5-1f2291b53f76"
+#$TenantID = "365f675a-0c84-46f1-a412-d9783a48076f"
 Connect-MgGraph -TenantId $TenantID -Scopes "User.ReadWrite.All", "Group.ReadWrite.All", "Directory.ReadWrite.All", "RoleManagement.ReadWrite.Directory"
 
 # Create users
@@ -54,3 +54,26 @@ foreach ($user in $users) {
 
 $group = Get-MgGroup -Filter "displayName eq 'HR Team'"
 (Get-MgGroupMember -GroupID $Group.Id).AdditionalProperties.userPrincipalName
+
+
+
+
+$users = Get-MGUser | Where-Object { $_.DisplayName -ne 'Tor Ivar Melling' }
+foreach ($user in $users) {
+    Remove-MgUser -UserId $user.id
+}
+
+
+# Create a new user
+$newUser = New-MgUser -AccountEnabled -DisplayName "Tim Admin" -MailNickname "TimAdmin" `
+-UserPrincipalName "TimAdmin@edudev365.onmicrosoft.com" `
+-PasswordProfile @{ Password = "dsfsgf332!Weasfdgdg"; ForceChangePasswordNextSignIn = $false } `
+-GivenName "Tim" -Surname "Admin"
+
+# Get the Global Administrator role definition
+$globalAdminRole = Get-MgDirectoryRole | Where-Object { $_.DisplayName -eq "Global Administrator" }
+
+# Assign the Global Administrator role to the new user
+New-MgDirectoryRoleMember -DirectoryRoleId $globalAdminRole.Id -RoleMemberId $newUser.Id
+
+
