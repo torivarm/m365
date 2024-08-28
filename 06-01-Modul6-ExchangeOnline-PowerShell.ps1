@@ -31,9 +31,9 @@ Set-UnifiedGroup
 Add-UnifiedGroupLinks -Identity "" -LinkType Members -Links Kari.nordmann@demoundervisning.onmicrosoft.com
 
 # https://docs.microsoft.com/en-us/powershell/module/exchange/new-mailbox?view=exchange-ps
-New-Mailbox -Name "@edudev365.onmicrosoft.com" `
-    -DisplayName "" `
-    -Alias "" `
+New-Mailbox -Name "Panorama-TEST@edudev365.onmicrosoft.com" `
+    -DisplayName "Panorama-TEST" `
+    -Alias "Panorama-TEST" `
     -Room `
     -EnableRoomMailboxAccount $true `
     -RoomMailboxPassword (ConvertTo-SecureString -String FfdE123e!wes_ -AsPlainText -Force)
