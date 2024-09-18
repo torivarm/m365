@@ -58,9 +58,10 @@ $group = Get-MgGroup -Filter "displayName eq 'HR Team'"
 
 
 
-$users = Get-MGUser | Where-Object { $_.DisplayName -ne 'Tor Ivar Melling' }
+# $users = Get-MGUser | Where-Object { $_.DisplayName -ne 'Tor Ivar Melling' }
 foreach ($user in $users) {
-    Remove-MgUser -UserId $user.id
+    $getuser = Get-MgUser -Filter "givenName eq '$($user.givenName)'"
+    Remove-MgUser -UserId $getuser.Id
 }
 
 
