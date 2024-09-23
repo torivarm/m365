@@ -1,11 +1,11 @@
-#$TenantID = "365f675a-0c84-46f1-a412-d9783a48076f"
+#$TenantID = "c2f75ca6-3a2c-4bd7-a8c3-7a0eb0be99e6"
 Connect-MgGraph -TenantId $TenantID -Scopes "User.ReadWrite.All", "Group.ReadWrite.All", "Directory.ReadWrite.All", "RoleManagement.ReadWrite.Directory"
 
 # Create users
 Get-Help New-MgUser -Online
 
 $PasswordProfile = @{
-    Password = 'DemoPassword12345!'
+    Password = 'dfsdfasd_Asd2dd'
     }
 
 $Params = @{
@@ -30,11 +30,11 @@ New-MgUser @Params
 $users = Import-CSV -Path '03-02-Users.csv' -Delimiter ","
 
 $PasswordProfile = @{
-    Password = 'DemoPassword12345!'
+    Password = 'sdfg_sa3SAs3_as3f!'
     }
 foreach ($user in $users) {
     $Params = @{
-        UserPrincipalName = $user.givenName + "." + $user.surName + "@minundervisning.onmicrosoft.com"
+        UserPrincipalName = $user.givenName + "." + $user.surName + "@m365tim.onmicrosoft.com"
         DisplayName = $user.givenName + " " + $user.surname
         GivenName = $user.GivenName
         Surname = $user.Surname
@@ -45,6 +45,7 @@ foreach ($user in $users) {
         CompanyName = $user.CompanyName
         Country = $user.Country
         City = $user.City
+        JobTitle = $user.JobTitle
     }
     $Params
     New-MgUser @Params

@@ -6,12 +6,12 @@ Get-Help New-MgGroup -Online
 
 # Create M365 Group for IT
 
-$departments = @("HR", "IT", "Sales", "Marketing", "Finance", "Support")
+$departments = @("Ledelse", "Utvikling", "Salg", "Kundesupport", "IT-drift", "Administrasjon")
 foreach ($department in $departments) {
     $membershiprule = "user.department -eq `"$department`""
     $Params = @{
-        DisplayName = "$department Team"
-        Description = "Group for all $department employees"
+        DisplayName = "$department"
+        Description = "Gruppe for ansatte i avdeligen $department"
         MailEnabled = $true
         MailNickname = $department
         SecurityEnabled = $true
@@ -30,16 +30,15 @@ $group = Get-MgGroup -Filter "displayName eq 'HR Team'"
 
 
 $Params = @{
-    DisplayName = "IT Team"
-    Description = "Team for all IT employees"
-    MailEnabled = $true
-    MailNickname = "it"
+    DisplayName = "m365-license"
+    Description = "Members of this group will get a M365 license"
+    MailEnabled = $false
+    MailNickname = "m365-license"
     SecurityEnabled = $true
-    GroupTypes = @("Unified", "DynamicMembership")
-    MembershipRule = 'user.department -eq "IT"'
-    MembershipRuleProcessingState = "On"
+    GroupTypes = "assigned"
     }
 
 New-MgGroup @Params
 
 
+New-MgGroup -DisplayName 'm365-license' -MailEnabled:$False -MailNickname "m365-license" -SecurityEnabled

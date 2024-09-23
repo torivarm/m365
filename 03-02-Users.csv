@@ -1,11 +1,25 @@
-givenName,surName,department,companyname,country,city
-Michael,Han,Support,Demo Company,Norway,Trondheim
-Mark,Medina,IT,Demo Company,Norway,Trondheim
-Christian,Harrington,HR,Demo Company,Norway,Trondheim
-Ian,Martinez,HR,Demo Company,Norway,Trondheim
-Michelle,Mendez,Support,Demo Company,Norway,Trondheim
-George,Warren,IT,Demo Company,Norway,Trondheim
-Keith,Rios,Finance,Demo Company,Norway,Trondheim
-John,Carr,Sales,Demo Company,Norway,Trondheim
-Donald,Warner,Marketing,Demo Company,Norway,Trondheim
-Gregory,Hale,Support,Demo Company,Norway,Trondheim
+givenName,surName,department,companyname,country,city,jobtitle
+Mikkel,Hansen,Ledelse,NyTechAS,Norway,Trondheim,CEO
+Markus,Medby,Ledelse,NyTechAS,Norway,Trondheim,CTO
+Kristian,Haug,Ledelse,NyTechAS,Norway,Trondheim,CFO
+Ivar,Martinsen,Ledelse,NyTechAS,Norway,Trondheim,HR-sjef
+Maren,Moe,Utvikling,NyTechAS,Norway,Trondheim,Utviklingsleder
+Geir,Wang,Utvikling,NyTechAS,Norway,Trondheim,Seniorutvikler
+Kjetil,Riis,Utvikling,NyTechAS,Norway,Trondheim,Seniorutvikler
+Johan,Karlsen,Utvikling,NyTechAS,Norway,Trondheim,Seniorutvikler
+Dagfinn,Warholm,Utvikling,NyTechAS,Norway,Trondheim,Juniorutvikler
+Gjermund,Haugen,Utvikling,NyTechAS,Norway,Trondheim,Juniorutvikler
+Lars,Bentzen,Utvikling,NyTechAS,Norway,Trondheim,Juniorutvikler
+Rolf,Pedersen,Utvikling,NyTechAS,Norway,Trondheim,Juniorutvikler
+Stian,Ytreland,Salg,NyTechAS,Norway,Trondheim,Salgs- og Markedsføringssjef
+Petra,Alver,Salg,NyTechAS,Norway,Trondheim,Selger
+Kari,Fretheim,Salg,NyTechAS,Norway,Trondheim,Selger
+Nina,Pedersen,Salg,NyTechAS,Norway,Trondheim,Markedsfører
+Bente,Gundersen,Salg,NyTechAS,Norway,Trondheim,Markedsfører
+Siri,Moen,Kundesupport,NyTechAS,Norway,Trondheim,Supportsjef
+Jan,Eide,Kundesupport,NyTechAS,Norway,Trondheim,Supportmedarbeider
+Astrid,Evjen,Kundesupport,NyTechAS,Norway,Trondheim,Supportmedarbeider
+Daniel,Thorsen,Kundesupport,NyTechAS,Norway,Trondheim,Supportmedarbeider
+Jonas,Skott,IT-drift,NyTechAS,Norway,Trondheim,IT-sjef
+Rikard,Berg,IT-drift,NyTechAS,Norway,Trondheim,IT-spesialist
+Emilie,Lien,Administrasjon,NyTechAS,Norway,Trondheim,Økonomiansvarlig
