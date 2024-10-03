@@ -31,7 +31,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 ```
 choco install powershell-core
-```
+``` 
 
 1. Følg eventuelle instruksjoner på skjermen.
 
