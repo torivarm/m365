@@ -9,7 +9,7 @@ For å installere PowerShell Core på Windows, skal vi først installere Chocola
 ### 1. Installere Chocolatey
 &nbsp;
 1. Åpne Windows PowerShell som administrator.
-![PowerShell as administrator](https://studntnu-my.sharepoint.com/:i:/g/personal/melling_ntnu_no/EQ-PPy8PrPBFu8lkJddFzFMBRG080IGRyZ7IBq719zi-Tg?e=lMDP1b "PowerShell as Administrator")
+![PowerShell as administrator](photo/PowerShell-Administrator.png "PowerShell as Administrator")
 1. Kjør følgende kommandoer:
 
 ```
@@ -27,7 +27,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ### 2. Installere PowerShell Core
 &nbsp;
 1. Med Chocolatey installert, kjør følgende kommando i PowerShell (administrator):
-![Chocolatey](https://studntnu-my.sharepoint.com/:i:/r/personal/melling_ntnu_no/Documents/public/bilder/PowerShell-Choco.png?csf=1&web=1&e=KzCzKy "PowerShell as Administrator")
+![Chocolatey](photo/PowerShell-Choco.png "Chocolatey")
 
 ```
 choco install powershell-core
