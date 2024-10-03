@@ -39,14 +39,14 @@ choco install powershell-core
 ### 3. Verifisere installasjonen
 &nbsp;
 1. Åpne en ny PowerShell Core terminal.
-![PowerShell Core](https://studntnu-my.sharepoint.com/:i:/r/personal/melling_ntnu_no/Documents/public/bilder/PowerShell-Core.png?csf=1&web=1&e=ktO1kD "PowerShell Core")
-2. Kjør følgende kommando for å sjekke versjonen:
+![PowerShell Core](photo/PowerShell-Core.png "PowerShell Core")
+1. Kjør følgende kommando for å sjekke versjonen:
 
 ```
 $PSVersionTable
 ```
 &nbsp;
-![PowerShell version table](https://studntnu-my.sharepoint.com/:i:/r/personal/melling_ntnu_no/Documents/public/bilder/PowerShell-PSversionTable.png?csf=1&web=1&e=a1hzlt "PowerShell version table")
+![PowerShell version table](photo/PowerShell-PSversionTable.png "PowerShell version table")
 
 &nbsp;
 ## macOS
@@ -56,7 +56,7 @@ For å installere PowerShell Core på macOS, skal vi først installere Homebrew 
 ### 1. Installere Homebrew
 
 1. Trykk Command + Space, åpne Terminal.
-![Terminal macOS](https://studntnu-my.sharepoint.com/:i:/r/personal/melling_ntnu_no/Documents/public/bilder/macOSTerminal.png?csf=1&web=1&e=MpgMeW "Terminal macOS")
+![Terminal macOS](photo/macOSTerminal.png "Terminal macOS")
 1. Kjør følgende kommando:
 
 ```
@@ -87,5 +87,5 @@ pwsh
 ```
 $PSVersionTable
 ```
-![macOS version table](https://studntnu-my.sharepoint.com/:i:/r/personal/melling_ntnu_no/Documents/public/bilder/PowerShell-MacOSPSVersionTable.png?csf=1&web=1&e=OWiU05 "macOS version table")
+![macOS version table](photo/macOSTerminal.png "macOS version table")
 
