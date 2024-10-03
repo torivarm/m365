@@ -87,5 +87,5 @@ pwsh
 ```
 $PSVersionTable
 ```
-![macOS version table](photo/macOSTerminal.png "macOS version table")
+![macOS version table](photo/PowerShell-MacOSPSVersionTable.png "macOS version table")
 
