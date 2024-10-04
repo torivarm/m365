@@ -9,7 +9,7 @@ For å installere PowerShell Core på Windows, skal vi først installere Chocola
 ### 1. Installere Chocolatey
 &nbsp;
 1. Åpne Windows PowerShell som administrator.
-![PowerShell as administrator](photo/PowerShell-Administrator.png "PowerShell as Administrator")
+![PowerShell as administrator](https://github.com/torivarm/m365/blob/main/guides/photo/PowerShell-Administrator.png?raw=true "PowerShell as Administrator")
 1. Kjør følgende kommandoer:
 
 ```
@@ -27,7 +27,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ### 2. Installere PowerShell Core
 &nbsp;
 1. Med Chocolatey installert, kjør følgende kommando i PowerShell (administrator):
-![Chocolatey](photo/PowerShell-Choco.png "Chocolatey")
+![Chocolatey](https://github.com/torivarm/m365/blob/main/guides/photo/PowerShell-Choco.png?raw=true "Chocolatey")
 
 ```
 choco install powershell-core
@@ -39,14 +39,14 @@ choco install powershell-core
 ### 3. Verifisere installasjonen
 &nbsp;
 1. Åpne en ny PowerShell Core terminal.
-![PowerShell Core](photo/PowerShell-Core.png "PowerShell Core")
+![PowerShell Core](https://github.com/torivarm/m365/blob/main/guides/photo/PowerShell-Core.png?raw=true "PowerShell Core")
 1. Kjør følgende kommando for å sjekke versjonen:
 
 ```
 $PSVersionTable
 ```
 &nbsp;
-![PowerShell version table](photo/PowerShell-PSversionTable.png "PowerShell version table")
+![PowerShell version table](https://github.com/torivarm/m365/blob/main/guides/photo/PowerShell-PSversionTable.png?raw=true "PowerShell version table")
 
 &nbsp;
 ## macOS
@@ -56,7 +56,7 @@ For å installere PowerShell Core på macOS, skal vi først installere Homebrew 
 ### 1. Installere Homebrew
 
 1. Trykk Command + Space, åpne Terminal.
-![Terminal macOS](photo/macOSTerminal.png "Terminal macOS")
+![Terminal macOS](https://github.com/torivarm/m365/blob/main/guides/photo/macOSTerminal.png?raw=true "Terminal macOS")
 1. Kjør følgende kommando:
 
 ```
@@ -87,5 +87,5 @@ pwsh
 ```
 $PSVersionTable
 ```
-![macOS version table](photo/PowerShell-MacOSPSVersionTable.png "macOS version table")
+![macOS version table](https://github.com/torivarm/m365/blob/main/guides/photo/PowerShell-MacOSPSVersionTable.png?raw=true "macOS version table")
 
