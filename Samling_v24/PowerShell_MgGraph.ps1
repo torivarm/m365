@@ -97,5 +97,3 @@ $Group.Id
 $Group | Get-Member -MemberType Property
 Get-MgGroupMember -GroupId $Group.Id
 (Get-MgGroupMember -GroupID $Group.Id).AdditionalProperties.userPrincipalName
-
-
