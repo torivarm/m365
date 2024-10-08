@@ -1,4 +1,4 @@
-$TenantID = "365f675a-0c84-46f1-a412-d9783a48076f"
+$TenantID = "c2f75ca6-3a2c-4bd7-a8c3-7a0eb0be99e6"
 Connect-MgGraph -TenantId $TenantID -Scopes "User.ReadWrite.All", "Group.ReadWrite.All", "Directory.ReadWrite.All", "RoleManagement.ReadWrite.Directory"
 
 # List Users
