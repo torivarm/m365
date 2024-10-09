@@ -1,5 +1,7 @@
-$TenantID = "06bf9568-f5b8-4a8b-bef5-1f2291b53f76"
-Connect-MgGraph -TenantId $TenantID -Scopes "User.ReadWrite.All", "Group.ReadWrite.All", "Directory.ReadWrite.All", "RoleManagement.ReadWrite.Directory"
+# If you are already connected to your Tenant from the 01-01-ConnectMgGraph.ps1 script, 
+# you can skip the connection part in this script.
+# $TenantID = "06bf9568-f5b8-4a8b-bef5-1f2291b53f76"
+# Connect-MgGraph -TenantId $TenantID -Scopes "User.ReadWrite.All", "Group.ReadWrite.All", "Directory.ReadWrite.All", "RoleManagement.ReadWrite.Directory"
 
 # Create groups
 Get-Help New-MgGroup -Online
