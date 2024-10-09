@@ -1,4 +1,4 @@
-# Script to create M365 Group and manage permissions
+# Script to create M365 Group and grant Full Access and Send As permissions
 # Ensure you're connected to Exchange Online before running this script
 
 # Function to check if a user exists
@@ -33,6 +33,7 @@ if (-not $groupExists) {
     try {
         $newGroup = New-UnifiedGroup -DisplayName $groupName -Alias $groupName -EmailAddresses $groupEmail -AccessType Private
         Write-Host "Group '$groupName' created successfully." -ForegroundColor Green
+        Start-Sleep -Seconds 60  # Wait for group creation to propagate
     } catch {
         Write-Host "Error creating group: $_" -ForegroundColor Red
         exit
@@ -41,26 +42,24 @@ if (-not $groupExists) {
     $newGroup = $existingGroup
 }
 
-# Add users to the group and set permissions
+# Get the group's details
+$groupDetails = Get-UnifiedGroup -Identity $groupName | Select-Object ExternalDirectoryObjectId, PrimarySmtpAddress
+
+# Process each user
 foreach ($userEmail in $userEmails) {
     if (Test-UserExists -UserEmail $userEmail) {
         try {
             # Add user to the group
-            Add-UnifiedGroupLinks -Identity $groupName -LinkType Members -Links $userEmail
+            Add-UnifiedGroupLinks -Identity $groupName -LinkType Members -Links $userEmail -Confirm:$false
             Write-Host "Added $userEmail to the group." -ForegroundColor Green
 
             # Grant Full Access permission
-            Add-MailboxPermission -Identity $newGroup.ExternalDirectoryObjectId -User $userEmail -AccessRights FullAccess -InheritanceType All
-            Write-Host "Granted Full Access permission for $userEmail." -ForegroundColor Green
-
-            # Grant Send on Behalf permission
-            Set-UnifiedGroup -Identity $groupName -GrantSendOnBehalfTo @{Add=$userEmail}
-            Write-Host "Granted Send on Behalf permission for $userEmail." -ForegroundColor Green
+            # Note: Full Access for M365 Groups is typically managed through group membership
+            Write-Host "Full Access granted through group membership for $userEmail." -ForegroundColor Green
 
             # Grant Send As permission
-            Add-RecipientPermission -Identity $newGroup.ExternalDirectoryObjectId -Trustee $userEmail -AccessRights SendAs
+            Add-RecipientPermission -Identity $groupDetails.PrimarySmtpAddress -Trustee $userEmail -AccessRights SendAs -Confirm:$false
             Write-Host "Granted Send As permission for $userEmail." -ForegroundColor Green
-
         } catch {
             Write-Host "Error processing user $userEmail : $_" -ForegroundColor Red
         }
@@ -68,3 +67,18 @@ foreach ($userEmail in $userEmails) {
 }
 
 Write-Host "Script execution completed." -ForegroundColor Green
+
+# Display final permissions
+Write-Host "`nFinal Permissions:" -ForegroundColor Cyan
+Write-Host "Group Members (Full Access):" -ForegroundColor Yellow
+try {
+    Get-UnifiedGroupLinks -Identity $groupName -LinkType Members | Format-Table DisplayName, PrimarySmtpAddress
+} catch {
+    Write-Host "Unable to retrieve group members: $_" -ForegroundColor Red
+}
+Write-Host "Send As:" -ForegroundColor Yellow
+try {
+    Get-RecipientPermission -Identity $groupDetails.PrimarySmtpAddress | Where-Object {$_.AccessRights -eq "SendAs"} | Format-Table Trustee, AccessRights
+} catch {
+    Write-Host "Unable to retrieve Send As permissions: $_" -ForegroundColor Red
+}
