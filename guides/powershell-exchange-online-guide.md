@@ -163,3 +163,65 @@ Test-TransportRule -SenderAddress ola.nordmann@bedrift.no -RecipientAddress ekst
 Denne kommandoen simulerer sending av en e-post og viser hvilke regler som ville blitt utløst, noe som er nyttig for feilsøking og verifisering av reglenes funksjonalitet.
 
 Gjennom effektiv bruk av disse PowerShell-cmdletene kan systemadministratorer raskt og effektivt administrere Exchange Online-miljøer, automatisere repetitive oppgaver, og implementere organisasjonens retningslinjer for e-postkommunikasjon og sikkerhet.
+
+# PowerShell for Exchange Online Administrasjon
+
+[Previous content remains unchanged]
+
+## Administrere Microsoft 365 Grupper
+
+Microsoft 365 Grupper er en viktig del av mange organisasjoners samarbeidsinfrastruktur. Disse gruppene kombinerer funksjonaliteten til distribusjonsgrupper med tilleggsfunksjoner som delte innbokser, kalendere, og SharePoint-områder. Som administrator er det viktig å kunne effektivt administrere disse gruppene, og PowerShell gir oss verktøyene for å gjøre dette på en effektiv måte.
+
+### Liste opp alle Microsoft 365 Grupper
+
+For å få en oversikt over alle Microsoft 365 Grupper i din Exchange Online-miljø, kan du bruke `Get-UnifiedGroup` cmdlet. Denne kommandoen gir deg grunnleggende informasjon om hver gruppe. Her er et eksempel på hvordan du kan bruke denne kommandoen:
+
+```powershell
+Get-UnifiedGroup | Select-Object DisplayName, PrimarySmtpAddress, ExternalDirectoryObjectId
+```
+
+Når du kjører denne kommandoen, vil PowerShell returnere en liste over alle M365 Grupper i miljøet ditt. For hver gruppe vil du se visningsnavnet, den primære e-postadressen, og den eksterne katalog-objekt-ID-en. Den eksterne katalog-objekt-ID-en er spesielt nyttig fordi den er den unike identifikatoren for gruppen på tvers av alle Microsoft 365-tjenester.
+
+### Finne Gruppepostbokser
+
+Hver Microsoft 365 Gruppe har en tilknyttet gruppepostboks. For å finne spesifikk informasjon om disse gruppepostboksene, kan du bruke `Get-Mailbox` cmdlet med `-GroupMailbox` parameteren. Her er hvordan du kan gjøre dette:
+
+```powershell
+Get-Mailbox -GroupMailbox | Select-Object DisplayName, PrimarySmtpAddress, ExternalDirectoryObjectId
+```
+
+Denne kommandoen vil gi deg en liste over alle gruppepostbokser, inkludert deres visningsnavn, primære e-postadresser, og eksterne katalog-objekt-ID-er. Dette er nyttig når du trenger å administrere eller feilsøke problemer spesifikt relatert til gruppepostbokser.
+
+### Detaljert Informasjon om en Spesifikk Gruppe
+
+Noen ganger trenger du mer detaljert informasjon om en bestemt gruppe. I slike tilfeller kan du bruke `Get-UnifiedGroup` cmdlet med `-Identity` parameteren, og sende resultatet til `Format-List` for å få en mer omfattende visning. Her er et eksempel:
+
+```powershell
+Get-UnifiedGroup -Identity "GruppeNavn" | Format-List
+```
+
+I denne kommandoen må du erstatte "GruppeNavn" med det faktiske navnet eller e-postadressen til gruppen du er interessert i. Denne kommandoen vil gi deg en detaljert liste over alle egenskapene til den spesifikke gruppen, inkludert innstillinger for medlemskap, tillatelser, og tilknyttede ressurser.
+
+### Eksportere Gruppeinformasjon til CSV
+
+For rapportering eller videre analyse kan det være nyttig å eksportere informasjonen om M365 Grupper til en CSV-fil. Dette kan du gjøre med følgende kommando:
+
+```powershell
+Get-UnifiedGroup | Select-Object DisplayName, PrimarySmtpAddress, ExternalDirectoryObjectId | Export-Csv -Path "C:\M365Grupper.csv" -NoTypeInformation
+```
+
+Denne kommandoen vil opprette en CSV-fil med navnet "M365Grupper.csv" i C:-katalogen. Du kan selvfølgelig endre filbanen etter behov. Filen vil inneholde visningsnavnet, den primære e-postadressen, og den eksterne katalog-objekt-ID-en for hver M365 Gruppe i miljøet ditt.
+
+### Filtrere Grupperesultater
+
+I større organisasjoner kan antallet M365 Grupper være betydelig, og det kan være nyttig å filtrere resultatene for å finne spesifikke grupper. Du kan bruke `-Filter` parameteren med `Get-UnifiedGroup` cmdlet for å oppnå dette. Her er et eksempel:
+
+```powershell
+Get-UnifiedGroup -Filter {DisplayName -like "*Prosjekt*"} | Select-Object DisplayName, PrimarySmtpAddress
+```
+
+Denne kommandoen vil returnere en liste over grupper som har ordet "Prosjekt" i visningsnavnet sitt, sammen med deres primære e-postadresser. Du kan tilpasse filteret etter dine spesifikke behov.
+
+Det er viktig å merke seg at for å kjøre disse kommandoene, må du ha de nødvendige administrative rettighetene i ditt Microsoft 365-miljø. Hvis du støter på problemer med tillatelser, kan det være nødvendig å kontakte din globale administrator.
+
+Ved å bruke disse PowerShell-kommandoene effektivt, kan du raskt få oversikt over og administrere Microsoft 365 Grupper i ditt Exchange Online-miljø. Dette er spesielt nyttig for å holde orden i større miljøer, utføre revisjoner, eller feilsøke problemer relatert til gruppepostbokser og -tillatelser.

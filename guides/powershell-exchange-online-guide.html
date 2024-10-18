@@ -3408,6 +3408,37 @@ body,
 </code></pre>
 <p>Denne kommandoen simulerer sending av en e-post og viser hvilke regler som ville blitt utløst, noe som er nyttig for feilsøking og verifisering av reglenes funksjonalitet.</p>
 <p>Gjennom effektiv bruk av disse PowerShell-cmdletene kan systemadministratorer raskt og effektivt administrere Exchange Online-miljøer, automatisere repetitive oppgaver, og implementere organisasjonens retningslinjer for e-postkommunikasjon og sikkerhet.</p>
+<h1 id="powershell-for-exchange-online-administrasjon-1">PowerShell for Exchange Online Administrasjon</h1>
+<p>[Previous content remains unchanged]</p>
+<h2 id="administrere-microsoft-365-grupper">Administrere Microsoft 365 Grupper</h2>
+<p>Microsoft 365 Grupper er en viktig del av mange organisasjoners samarbeidsinfrastruktur. Disse gruppene kombinerer funksjonaliteten til distribusjonsgrupper med tilleggsfunksjoner som delte innbokser, kalendere, og SharePoint-områder. Som administrator er det viktig å kunne effektivt administrere disse gruppene, og PowerShell gir oss verktøyene for å gjøre dette på en effektiv måte.</p>
+<h3 id="liste-opp-alle-microsoft-365-grupper">Liste opp alle Microsoft 365 Grupper</h3>
+<p>For å få en oversikt over alle Microsoft 365 Grupper i din Exchange Online-miljø, kan du bruke <code>Get-UnifiedGroup</code> cmdlet. Denne kommandoen gir deg grunnleggende informasjon om hver gruppe. Her er et eksempel på hvordan du kan bruke denne kommandoen:</p>
+<pre><code class="language-powershell"><span class="hljs-built_in">Get-UnifiedGroup</span> | <span class="hljs-built_in">Select-Object</span> DisplayName, PrimarySmtpAddress, ExternalDirectoryObjectId
+</code></pre>
+<p>Når du kjører denne kommandoen, vil PowerShell returnere en liste over alle M365 Grupper i miljøet ditt. For hver gruppe vil du se visningsnavnet, den primære e-postadressen, og den eksterne katalog-objekt-ID-en. Den eksterne katalog-objekt-ID-en er spesielt nyttig fordi den er den unike identifikatoren for gruppen på tvers av alle Microsoft 365-tjenester.</p>
+<h3 id="finne-gruppepostbokser">Finne Gruppepostbokser</h3>
+<p>Hver Microsoft 365 Gruppe har en tilknyttet gruppepostboks. For å finne spesifikk informasjon om disse gruppepostboksene, kan du bruke <code>Get-Mailbox</code> cmdlet med <code>-GroupMailbox</code> parameteren. Her er hvordan du kan gjøre dette:</p>
+<pre><code class="language-powershell"><span class="hljs-built_in">Get-Mailbox</span> <span class="hljs-literal">-GroupMailbox</span> | <span class="hljs-built_in">Select-Object</span> DisplayName, PrimarySmtpAddress, ExternalDirectoryObjectId
+</code></pre>
+<p>Denne kommandoen vil gi deg en liste over alle gruppepostbokser, inkludert deres visningsnavn, primære e-postadresser, og eksterne katalog-objekt-ID-er. Dette er nyttig når du trenger å administrere eller feilsøke problemer spesifikt relatert til gruppepostbokser.</p>
+<h3 id="detaljert-informasjon-om-en-spesifikk-gruppe">Detaljert Informasjon om en Spesifikk Gruppe</h3>
+<p>Noen ganger trenger du mer detaljert informasjon om en bestemt gruppe. I slike tilfeller kan du bruke <code>Get-UnifiedGroup</code> cmdlet med <code>-Identity</code> parameteren, og sende resultatet til <code>Format-List</code> for å få en mer omfattende visning. Her er et eksempel:</p>
+<pre><code class="language-powershell"><span class="hljs-built_in">Get-UnifiedGroup</span> <span class="hljs-literal">-Identity</span> <span class="hljs-string">&quot;GruppeNavn&quot;</span> | <span class="hljs-built_in">Format-List</span>
+</code></pre>
+<p>I denne kommandoen må du erstatte &quot;GruppeNavn&quot; med det faktiske navnet eller e-postadressen til gruppen du er interessert i. Denne kommandoen vil gi deg en detaljert liste over alle egenskapene til den spesifikke gruppen, inkludert innstillinger for medlemskap, tillatelser, og tilknyttede ressurser.</p>
+<h3 id="eksportere-gruppeinformasjon-til-csv">Eksportere Gruppeinformasjon til CSV</h3>
+<p>For rapportering eller videre analyse kan det være nyttig å eksportere informasjonen om M365 Grupper til en CSV-fil. Dette kan du gjøre med følgende kommando:</p>
+<pre><code class="language-powershell"><span class="hljs-built_in">Get-UnifiedGroup</span> | <span class="hljs-built_in">Select-Object</span> DisplayName, PrimarySmtpAddress, ExternalDirectoryObjectId | <span class="hljs-built_in">Export-Csv</span> <span class="hljs-literal">-Path</span> <span class="hljs-string">&quot;C:\M365Grupper.csv&quot;</span> <span class="hljs-literal">-NoTypeInformation</span>
+</code></pre>
+<p>Denne kommandoen vil opprette en CSV-fil med navnet &quot;M365Grupper.csv&quot; i C:-katalogen. Du kan selvfølgelig endre filbanen etter behov. Filen vil inneholde visningsnavnet, den primære e-postadressen, og den eksterne katalog-objekt-ID-en for hver M365 Gruppe i miljøet ditt.</p>
+<h3 id="filtrere-grupperesultater">Filtrere Grupperesultater</h3>
+<p>I større organisasjoner kan antallet M365 Grupper være betydelig, og det kan være nyttig å filtrere resultatene for å finne spesifikke grupper. Du kan bruke <code>-Filter</code> parameteren med <code>Get-UnifiedGroup</code> cmdlet for å oppnå dette. Her er et eksempel:</p>
+<pre><code class="language-powershell"><span class="hljs-built_in">Get-UnifiedGroup</span> <span class="hljs-literal">-Filter</span> {DisplayName <span class="hljs-operator">-like</span> <span class="hljs-string">&quot;*Prosjekt*&quot;</span>} | <span class="hljs-built_in">Select-Object</span> DisplayName, PrimarySmtpAddress
+</code></pre>
+<p>Denne kommandoen vil returnere en liste over grupper som har ordet &quot;Prosjekt&quot; i visningsnavnet sitt, sammen med deres primære e-postadresser. Du kan tilpasse filteret etter dine spesifikke behov.</p>
+<p>Det er viktig å merke seg at for å kjøre disse kommandoene, må du ha de nødvendige administrative rettighetene i ditt Microsoft 365-miljø. Hvis du støter på problemer med tillatelser, kan det være nødvendig å kontakte din globale administrator.</p>
+<p>Ved å bruke disse PowerShell-kommandoene effektivt, kan du raskt få oversikt over og administrere Microsoft 365 Grupper i ditt Exchange Online-miljø. Dette er spesielt nyttig for å holde orden i større miljøer, utføre revisjoner, eller feilsøke problemer relatert til gruppepostbokser og -tillatelser.</p>
 </div>
         </div>
             <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
