@@ -1,5 +1,3 @@
-# Script to create M365 Group and grant Full Access and Send As permissions
-# Ensure you're connected to Exchange Online before running this script
 
 # Function to check if a user exists
 function Test-UserExists {
@@ -13,12 +11,13 @@ function Test-UserExists {
     }
 }
 
-# Parameters
-$groupName = "TestGroup" # Change this to your desired group name
-$groupEmail = "testgroup@m365tim.onmicrosoft.com" # Change this to your desired group email
-$userEmails = @("Astrid.Evjen@m365tim.onmicrosoft.com", "Bente.Gundersen@m365tim.onmicrosoft.com") # Add your user emails here
 
-# Check if the group already exists
+$groupName = "TestGroup2" # Change this to your desired group name
+$groupEmail = "TestGroup2@m365tim.onmicrosoft.com" # Change this to your desired group email
+$userEmails = @("Dagfinn.Warholm@m365tim.onmicrosoft.com", "Daniel.Thorsen@m365tim.onmicrosoft.com", "Emilie.Lien@m365tim.onmicrosoft.com") # Add your user emails here (add more "" as needed)
+
+
+# Check if group already exists
 $groupExists = $false
 try {
     $existingGroup = Get-UnifiedGroup -Identity $groupName -ErrorAction Stop
@@ -33,7 +32,7 @@ if (-not $groupExists) {
     try {
         $newGroup = New-UnifiedGroup -DisplayName $groupName -Alias $groupName -EmailAddresses $groupEmail -AccessType Private
         Write-Host "Group '$groupName' created successfully." -ForegroundColor Green
-        Start-Sleep -Seconds 60  # Wait for group creation to propagate
+        Start-Sleep -Seconds 30  # Wait for group creation to propagate
     } catch {
         Write-Host "Error creating group: $_" -ForegroundColor Red
         exit
@@ -42,10 +41,10 @@ if (-not $groupExists) {
     $newGroup = $existingGroup
 }
 
+
 # Get the group's details
 $groupDetails = Get-UnifiedGroup -Identity $groupName | Select-Object ExternalDirectoryObjectId, PrimarySmtpAddress
 
-# Process each user
 foreach ($userEmail in $userEmails) {
     if (Test-UserExists -UserEmail $userEmail) {
         try {
