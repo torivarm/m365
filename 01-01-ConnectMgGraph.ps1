@@ -26,9 +26,9 @@ Connect-MgGraph -TenantId $TenantID `
     -Scopes "User.ReadWrite.All", `
             "Group.ReadWrite.All", `
             "Directory.ReadWrite.All", `
-            "RoleManagement.ReadWrite.Directory"<#, `
+            "RoleManagement.ReadWrite.Directory", `
             "AuditLog.Read.All", `
-            "Application.Read.All" #>
+            "Application.Read.All"
 
 $Details = Get-MgContext
 $Scopes = $Details | Select-Object -ExpandProperty Scopes
