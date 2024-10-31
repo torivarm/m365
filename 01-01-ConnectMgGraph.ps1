@@ -21,14 +21,14 @@ if ($module -eq $null) {
 
 # Connection to my M365 Tenant with Microsoft Graph PowerShell module
 # Change to your TenantID!!
-$TenantID = "02feabb9-444e-4f66-9c13-6a8f04b75c2f" # <-- Remember to change this to your TenantID
+$TenantID = "f5d7ff48-e4cf-4114-ab5b-1a930c176f9d" # <-- Remember to change this to your TenantID
 Connect-MgGraph -TenantId $TenantID `
     -Scopes "User.ReadWrite.All", `
             "Group.ReadWrite.All", `
             "Directory.ReadWrite.All", `
             "RoleManagement.ReadWrite.Directory", `
             "AuditLog.Read.All", `
-            "Application.Read.All"
+            "Application.ReadWrite.All"
 
 $Details = Get-MgContext
 $Scopes = $Details | Select-Object -ExpandProperty Scopes
