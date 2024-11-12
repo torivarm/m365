@@ -9,7 +9,7 @@ $PasswordProfile = @{
     }
 
 $Params = @{
-    UserPrincipalName = "Hedda.Hansen@edudev365.onmicrosoft.com"
+    UserPrincipalName = "Hedda.Hansen@<yourtenant>.onmicrosoft.com"
     DisplayName = "Hedda Hansen"
     GivenName = "Hedda"
     Surname = "Hansen"
@@ -30,11 +30,11 @@ New-MgUser @Params
 $users = Import-CSV -Path '03-02-Users.csv' -Delimiter ","
 
 $PasswordProfile = @{
-    Password = 'sdfg_sa3SAs3_as3f!'
+    Password = 'dsdfsdfsdfsdfsdf123123'
     }
 foreach ($user in $users) {
     $Params = @{
-        UserPrincipalName = $user.givenName + "." + $user.surName + "@m365tim.onmicrosoft.com"
+        UserPrincipalName = $user.givenName + "." + $user.surName + "@<yourtenant>.onmicrosoft.com"
         DisplayName = $user.givenName + " " + $user.surname
         GivenName = $user.GivenName
         Surname = $user.Surname
