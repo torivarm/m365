@@ -4,7 +4,7 @@
 # Connect-MgGraph -TenantId $TenantID -Scopes "User.ReadWrite.All", "Group.ReadWrite.All", "Directory.ReadWrite.All", "RoleManagement.ReadWrite.Directory"
 
 # Create groups
-Get-Help New-MgGroup -Online
+#Get-Help New-MgGroup -Online
 
 # Create M365 Group for IT
 
