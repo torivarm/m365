@@ -69,7 +69,7 @@ foreach ($user in $users) {
 # Create a new user
 $newUser = New-MgUser -AccountEnabled -DisplayName "Tim Admin" -MailNickname "TimAdmin" `
 -UserPrincipalName "TimAdmin@minundervisning.onmicrosoft.com" `
--PasswordProfile @{ Password = "adsfg3!weafg_fsdf"; ForceChangePasswordNextSignIn = $false } `
+-PasswordProfile @{ Password = "asdfsdf31231231_asf"; ForceChangePasswordNextSignIn = $false } `
 -GivenName "Tim" -Surname "Admin"
 
 # Get the Global Administrator role definition
