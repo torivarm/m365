@@ -305,29 +305,7 @@ Write-Host "====================================" -ForegroundColor Cyan
 
 ---
 
-## Neste steg
-
 Gratulerer! 🎉 Du har nå satt opp et moderne PowerShell-utviklingsmiljø. Her er noen forslag til hva du kan gjøre videre:
-
-1. **Installer Microsoft 365 PowerShell-moduler**
-   - Microsoft Graph PowerShell SDK
-   - Exchange Online Management
-   - Teams PowerShell Module
-
-2. **Lær grunnleggende PowerShell-kommandoer**
-   - Get-Help
-   - Get-Command
-   - Get-Member
-
-3. **Utforsk VS Code-funksjoner**
-   - Snippets for raskere koding
-   - Git-integrasjon for versjonskontroll
-   - Debugging av PowerShell-script
-
-4. **Øv på Microsoft 365-automatisering**
-   - Koble til Microsoft 365-tjenester
-   - Hente brukerinformasjon
-   - Administrere grupper og teams
 
 ---
 
