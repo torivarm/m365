@@ -43,7 +43,7 @@ Visual Studio Code er en gratis, lett og kraftig kodeeditor fra Microsoft som gi
    - Dobbeltklikk på den nedlastede filen (f.eks. `VSCodeUserSetup-x64-1.85.0.exe`)
    - Følg installasjonsveiviseren:
      - Godta lisensavtalen
-     - **VIKTIG:** Huk av for følgende alternativer:
+     - Huk av for følgende alternativer:
        - ☑️ "Add 'Open with Code' action to Windows Explorer file context menu"
        - ☑️ "Add 'Open with Code' action to Windows Explorer directory context menu"
        - ☑️ "Register Code as an editor for supported file types"
@@ -205,7 +205,7 @@ La oss sikre at alt fungerer korrekt ved å lage og kjøre et enkelt testscript.
 
 ### 1. Opprett et testscript i VS Code
 
-1. **Åpne VS Code**
+1. **Åpne VS Code** (Win / MacOS)
 2. **Opprett en ny fil** (`Ctrl+N` / `Cmd+N`)
 3. **Lagre filen** som `test-miljø.ps1` (`Ctrl+S` / `Cmd+S`)
 4. **Skriv inn følgende testscript:**
@@ -265,9 +265,12 @@ Write-Host "====================================" -ForegroundColor Cyan
 **I VS Code:**
 1. Åpne den integrerte terminalen (`Ctrl+`` ` eller `View → Terminal`)
 2. Sørg for at du er i riktig mappe hvor du lagret scriptet
-3. Kjør scriptet:
+3. Kjør scriptet: Win / MacOS
    ```powershell
    .\test-miljø.ps1
+   ```
+   ```powershell
+   ./test-miljø.ps1
    ```
 
 **Forventet resultat:**
