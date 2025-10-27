@@ -353,7 +353,7 @@ function Get-BrukerInfo {
     )
     
     try {
-        $bruker = Get-MgUser -UserId $Epost
+        $bruker = Get-MgUser -UserId $Epost -Property DisplayName,UserPrincipalName,JobTitle,Department,AccountEnabled
         
         Write-Host "=== Brukerinformasjon ==="
         Write-Host "Navn: $($bruker.DisplayName)"

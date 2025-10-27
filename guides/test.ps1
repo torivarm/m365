@@ -1,23 +1,24 @@
-# Hent alle brukere (eller bruk -Top for testing)
-$brukere = Get-MgUser -Top 50 -Property Department,UserPrincipalName
-
-# Opprett en hashtable for telling
-$avdelinger = @{}
-
-# Tell brukere per avdeling
-foreach ($bruker in $brukere) {
-    if ($bruker.Department) {
-        if ($avdelinger.ContainsKey($bruker.Department)) {
-            $avdelinger[$bruker.Department]++
-        }
-        else {
-            $avdelinger[$bruker.Department] = 1
-        }
+function Get-BrukerInfo {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Epost
+    )
+    
+    try {
+        $bruker = Get-MgUser -UserId $Epost -Property DisplayName,UserPrincipalName,JobTitle,Department,AccountEnabled
+        
+        Write-Host "=== Brukerinformasjon ==="
+        Write-Host "Navn: $($bruker.DisplayName)"
+        Write-Host "E-post: $($bruker.UserPrincipalName)"
+        Write-Host "Jobbtittel: $($bruker.JobTitle)"
+        Write-Host "Avdeling: $($bruker.Department)"
+        Write-Host "Konto aktiv: $($bruker.AccountEnabled)"
+    }
+    catch {
+        Write-Host "❌ Kunne ikke hente bruker: $($_.Exception.Message)" -ForegroundColor Red
     }
 }
 
-# Vis resultatet
-Write-Host "`n=== Brukere per avdeling ==="
-foreach ($avdeling in $avdelinger.Keys) {
-    Write-Host "$avdeling : $($avdelinger[$avdeling]) bruker(e)"
-}
+# Bruk funksjonen
+Connect-MgGraph -Scopes "User.Read.All"
+Get-BrukerInfo -Epost "me"
