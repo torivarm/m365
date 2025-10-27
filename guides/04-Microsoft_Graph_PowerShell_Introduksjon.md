@@ -172,6 +172,15 @@ Bruk variabler til å lagre informasjon fra Graph for senere bruk.
 
 ### Eksempel: Lagre brukerinformasjon
 
+Husk at Get-MgUser kommandoen ikke tar med alle egenskaper til objektet om en ikke spesifiserer hva en ønsker.
+Bruk Get-Member kommandoen for å liste ut alle mulige egenskaper en kan liste ut.
+Eksempel:
+```powershell
+$minBruker = Get-MgUser -UserID "min UserPrincipalName"
+$minBruker | Get-Member
+```
+---
+
 ```powershell
 Connect-MgGraph -Scopes "User.Read.All"
 
@@ -224,10 +233,13 @@ else {
 
 ### Eksempel: Sjekk kontostatus
 
+Husk at Get-MgUser kommandoen ikke tar med alle egenskaper til objektet om en ikke spesifiserer hva en ønsker.
+Bruk Get-Member kommandoen for å liste ut alle mulige egenskaper en kan liste ut.
+
 ```powershell
 Connect-MgGraph -Scopes "User.Read.All"
 
-$bruker = Get-MgUser -UserId "me"
+$bruker = Get-MgUser -UserId "me" -Property AccountEnabled,DisplayName,UserPrincipalName
 
 if ($bruker.AccountEnabled -eq $true) {
     Write-Host "✅ Kontoen er aktiv" -ForegroundColor Green
