@@ -86,26 +86,24 @@ Write-Host "Brukerinfo: $($brukerInfo.Fornavn) $($brukerInfo.Etternavn) - $($bru
 # Koble til Microsoft Graph
 Connect-MgGraph -Scopes "User.Read.All"
 
-# Hent en bruker og lagre i variabel
+# Hent en bruker og lagre i variabel (MERK! I eksemplet under må navn erstattes med en av sine egne brukere og bedrift.no må erstattes med egen @<eget-opprettet-navn>.onmicrosoft.com)
 $bruker = Get-MgUser -UserId "ola.nordmann@bedrift.no"
 
 # Lagre spesifikke egenskaper
 $displayNavn = $bruker.DisplayName
 $jobbtittel = $bruker.JobTitle
 $avdeling = $bruker.Department
-$kontor = $bruker.OfficeLocation
 
 # Sjekk om bruker har lisens (array av lisenser)
 $lisenser = Get-MgUserLicenseDetail -UserId $bruker.Id
-$harM365Lisens = $lisenser.SkuPartNumber -contains "SPE_E3"
+$harM365Lisens = $lisenser.SkuPartNumber -contains "SPB"
 
 # Vis informasjon
 Write-Host "=== Brukerinformasjon ===" -ForegroundColor Cyan
 Write-Host "Navn: $displayNavn"
 Write-Host "Stilling: $jobbtittel"
 Write-Host "Avdeling: $avdeling"
-Write-Host "Kontor: $kontor"
-Write-Host "Har M365 E3: $harM365Lisens"
+Write-Host "Har Microsoft 365 Business Premium lisens: $harM365Lisens"
 
 Disconnect-MgGraph
 ```
