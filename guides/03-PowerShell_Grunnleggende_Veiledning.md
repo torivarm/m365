@@ -1222,33 +1222,11 @@ function Get-DiskInfo {
 }
 ```
 
-### Neste steg:
+### Egenlæring:
 
 1. Øv på eksemplene i denne veiledningen
-2. Lag egne små skript for daglige oppgaver
+2. Prøv å lage egne små skript for daglige oppgaver
 3. Utforsk PowerShell-moduler for spesifikke oppgaver
-4. Les PowerShell-dokumentasjonen: `Get-Help about_*`
-5. Bruk `Get-Command` for å finne kommandoer
-6. Bruk `Get-Help <kommando> -Examples` for eksempler
-
-### Nyttige kommandoer for læring:
-
-```powershell
-# Finn alle kommandoer som inneholder 'Process'
-Get-Command *Process*
-
-# Få hjelp til en kommando
-Get-Help Get-Process -Full
-
-# Se eksempler
-Get-Help Get-Process -Examples
-
-# Finn alle 'about' hjelp-emner
-Get-Help about_*
-
-# Lær om variabler
-Get-Help about_Variables -ShowWindow
-```
 
 ---
 
