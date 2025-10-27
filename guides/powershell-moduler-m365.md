@@ -622,14 +622,5 @@ foreach ($module in $modules) {
 
 ---
 
-## 🎓 Oppgaver for selvstudium
-
-1. **Grunnleggende**: Installer alle tre hovedmodulene og verifiser at du kan koble til hver tjeneste
-2. **Middels**: Lag et script som henter alle brukere uten lisens
-3. **Avansert**: Lag et script som oppretter et nytt team, legger til medlemmer og setter opp kanaler automatisk
-4. **Ekspert**: Lag en rapport som kombinerer data fra Graph, Exchange og Teams
-
----
-
 *Sist oppdatert: Oktober 2025*
 *Versjon: 1.0*
