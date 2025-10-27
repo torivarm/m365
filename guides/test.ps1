@@ -1,19 +1,10 @@
-# Lagre som Skriv-Melding.ps1
-param(
-    [Parameter(Mandatory=$true)]
-    [string]$Melding,
-    
-    [switch]$Farge,
-    [switch]$Stor
-)
+# Koble til
+Connect-MgGraph -Scopes "User.Read.All"
 
-if ($Stor) {
-    $Melding = $Melding.ToUpper()
-}
+# Hent en spesifikk bruker (bruk din egen e-post)
+$bruker = Get-MgUser -UserId "ivar.martinsen@NTNU961.onmicrosoft.com"
 
-if ($Farge) {
-    Write-Host $Melding -ForegroundColor Cyan
-}
-else {
-    Write-Host $Melding
-}
+# Vis informasjon
+Write-Host "Navn: $($bruker.DisplayName)"
+Write-Host "E-post: $($bruker.UserPrincipalName)"
+Write-Host "Jobb: $($bruker.JobTitle)"

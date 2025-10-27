@@ -111,7 +111,7 @@ Disconnect-MgGraph
 Connect-MgGraph -Scopes "User.Read.All"
 
 # 2. Hent informasjon om deg selv
-Get-MgUser -UserId "me" | Select-Object DisplayName, UserPrincipalName, Id
+Get-MgUser -UserId "<skriv inn din UPN: xx@xx.onmicrosoft.com>" | Select-Object DisplayName, UserPrincipalName, Id
 
 # 3. Koble fra
 Disconnect-MgGraph
@@ -129,7 +129,7 @@ Disconnect-MgGraph
 # Koble til
 Connect-MgGraph -Scopes "User.Read.All"
 
-# Hent en spesifikk bruker (bruk din egen e-post)
+# Hent en spesifikk bruker (bruk din egen e-post - eller en annen bruker i din M365)
 $bruker = Get-MgUser -UserId "ola.nordmann@dittdomene.no"
 
 # Vis informasjon
