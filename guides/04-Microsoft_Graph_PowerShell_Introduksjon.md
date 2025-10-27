@@ -517,7 +517,7 @@ Write-Host "=== BRUKERRAPPORT ===" -ForegroundColor Cyan
 Write-Host "Generert: $(Get-Date -Format 'dd.MM.yyyy HH:mm')`n"
 
 # Hent brukere
-$brukere = Get-MgUser -Top 20 -Property UserPrincipalName,DisplayName,AccountEnabled
+$brukere = Get-MgUser -Top 20 -Property UserPrincipalName,DisplayName,AccountEnabled,Department
 
 # Statistikk
 $totalt = $brukere.Count
