@@ -255,7 +255,7 @@ else {
 Connect-MgGraph -Scopes "User.Read.All"
 
 # Hent bruker
-$bruker = Get-MgUser -UserId "me"
+$bruker = Get-MgUser -UserId "me" -Property Department,UserPrincipalName
 
 # Sjekk avdeling
 if ($bruker.Department -eq "IT") {

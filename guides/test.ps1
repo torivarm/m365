@@ -1,7 +1,23 @@
-$bruker = Get-MgUser -UserId "ivar.martinsen@NTNU961.onmicrosoft.com" -Property AccountEnabled,DisplayName,UserPrincipalName
-if ($bruker.AccountEnabled -eq $true) {
-    Write-Host "✅ Kontoen er aktiv" -ForegroundColor Green
+# Hent alle brukere (eller bruk -Top for testing)
+$brukere = Get-MgUser -Top 50 -Property Department,UserPrincipalName
+
+# Opprett en hashtable for telling
+$avdelinger = @{}
+
+# Tell brukere per avdeling
+foreach ($bruker in $brukere) {
+    if ($bruker.Department) {
+        if ($avdelinger.ContainsKey($bruker.Department)) {
+            $avdelinger[$bruker.Department]++
+        }
+        else {
+            $avdelinger[$bruker.Department] = 1
+        }
+    }
 }
-else {
-    Write-Host "❌ Kontoen er deaktivert" -ForegroundColor Red
+
+# Vis resultatet
+Write-Host "`n=== Brukere per avdeling ==="
+foreach ($avdeling in $avdelinger.Keys) {
+    Write-Host "$avdeling : $($avdelinger[$avdeling]) bruker(e)"
 }
