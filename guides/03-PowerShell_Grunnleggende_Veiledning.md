@@ -844,53 +844,53 @@ Write-Host "Du er $Alder år og bor i $By"
 ### Flere parametere med hjelpetekst
 
 ```powershell
-# Lagre som Beregn-BMI.ps1
+# Lagre som Beregn-Stromkostnad.ps1
 <#
 .SYNOPSIS
-    Beregner BMI (Body Mass Index)
+    Beregner månedlig strømkostnad
     
 .DESCRIPTION
-    Dette skriptet beregner BMI basert på høyde og vekt
+    Dette skriptet beregner månedlig strømkostnad basert på forbruk og pris
     
-.PARAMETER Hoyde
-    Høyde i centimeter
+.PARAMETER Forbruk
+    Månedsforbruk i kWh (kilowattimer)
     
-.PARAMETER Vekt
-    Vekt i kilogram
+.PARAMETER PrisPerKwh
+    Strømpris i kroner per kWh
     
 .EXAMPLE
-    .\Beregn-BMI.ps1 -Hoyde 180 -Vekt 75
+    .\Beregn-Stromkostnad.ps1 -Forbruk 500 -PrisPerKwh 1.50
 #>
 
 param(
-    [Parameter(Mandatory=$true, HelpMessage="Høyde i centimeter")]
-    [ValidateRange(50, 300)]
-    [int]$Hoyde,
+    [Parameter(Mandatory=$true, HelpMessage="Månedsforbruk i kWh")]
+    [ValidateRange(0, 10000)]
+    [int]$Forbruk,
     
-    [Parameter(Mandatory=$true, HelpMessage="Vekt i kilogram")]
-    [ValidateRange(10, 300)]
-    [double]$Vekt
+    [Parameter(Mandatory=$true, HelpMessage="Pris per kWh i kroner")]
+    [ValidateRange(0.1, 10)]
+    [double]$PrisPerKwh
 )
 
-# Beregn BMI
-$hoydeIMeter = $Hoyde / 100
-$bmi = [math]::Round($Vekt / ($hoydeIMeter * $hoydeIMeter), 1)
+# Beregn månedskostnad
+$kostnad = [math]::Round($Forbruk * $PrisPerKwh, 2)
 
 # Vis resultat
-Write-Host "Din BMI: $bmi"
+Write-Host "Månedlig strømkostnad: $kostnad kr"
+Write-Host "Gjennomsnittlig daglig kostnad: $([math]::Round($kostnad / 30, 2)) kr"
 
-# Kategorisering
-if ($bmi -lt 18.5) {
-    Write-Host "Kategori: Undervekt" -ForegroundColor Yellow
+# Kategorisering av forbruk
+if ($Forbruk -lt 300) {
+    Write-Host "Forbrukskategori: Lavt forbruk" -ForegroundColor Green
 }
-elseif ($bmi -lt 25) {
-    Write-Host "Kategori: Normal vekt" -ForegroundColor Green
+elseif ($Forbruk -lt 600) {
+    Write-Host "Forbrukskategori: Normalt forbruk" -ForegroundColor Yellow
 }
-elseif ($bmi -lt 30) {
-    Write-Host "Kategori: Overvekt" -ForegroundColor Yellow
+elseif ($Forbruk -lt 1000) {
+    Write-Host "Forbrukskategori: Høyt forbruk" -ForegroundColor DarkYellow
 }
 else {
-    Write-Host "Kategori: Fedme" -ForegroundColor Red
+    Write-Host "Forbrukskategori: Svært høyt forbruk" -ForegroundColor Red
 }
 ```
 
