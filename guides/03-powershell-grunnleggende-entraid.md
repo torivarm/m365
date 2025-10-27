@@ -153,7 +153,7 @@ if ($dageSidenInnlogging.Days -gt 90) {
 # check-user-status.ps1
 # Sjekk og håndter brukerstatus i EntraID
 
-Connect-MgGraph -Scopes "User.Read.All", "User.Update.All", "User.ReadWrite.All", "AuditLog.Read.All"
+Connect-MgGraph -Scopes "User.ReadWrite.All", "AuditLog.Read.All"
 
 function Test-BrukerStatus {
     param(
@@ -195,13 +195,14 @@ function Test-BrukerStatus {
 # Test funksjonen
 Test-BrukerStatus -UserPrincipalName "test@bedrift.no"
 
+Disconnect-MgGraph
 ```
 
 ### 🔧 Switch-setninger
 
 ```powershell
 # switch-example.ps1
-# Bruk av switch for flere alternativer
+# Bruk av switch for flere alternativer (MERK! Gjør ingenting mot M365, bare for å vise Switch)
 
 function Set-BrukerLisens {
     param(
@@ -285,7 +286,7 @@ foreach ($bruker in $brukerRoller.GetEnumerator()) {
 
 ```powershell
 # process-multiple-users.ps1
-# Behandle flere brukere med ForEach
+# Behandle flere brukere med ForEach (Henter alle brukre med department IT)
 
 Connect-MgGraph -Scopes "User.Read.All", "Group.Read.All"
 

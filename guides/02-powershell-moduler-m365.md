@@ -263,12 +263,6 @@ Get-Mailbox -ResultSize 5 |
     Select-Object DisplayName, PrimarySmtpAddress, WhenCreated |
     Format-Table
 
-# Sjekk e-postflyt
-$messageTrace = Get-MessageTrace -SenderAddress $userPrincipalName -PageSize 1
-if ($messageTrace) {
-    Write-Host "✅ E-postflyt fungerer" -ForegroundColor Green
-}
-
 # Vis tilkoblingsinfo
 $connection = Get-ConnectionInformation
 Write-Host "`n📊 Tilkoblingsdetaljer:" -ForegroundColor Yellow
