@@ -175,8 +175,8 @@ Bruk variabler til å lagre informasjon fra Graph for senere bruk.
 ```powershell
 Connect-MgGraph -Scopes "User.Read.All"
 
-# Hent bruker og lagre i variabel
-$minBruker = Get-MgUser -UserId "me"
+# Hent bruker og lagre i variabel (Erstatt me med en brukers UserPrincipalName (UPN))
+$minBruker = Get-MgUser -UserId "me" -Property UserPrincipalName,Department,DisplayName,JobTitle
 
 # Bruk variabelen senere
 $navn = $minBruker.DisplayName

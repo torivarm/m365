@@ -1,10 +1,14 @@
-# Koble til
 Connect-MgGraph -Scopes "User.Read.All"
 
-# Hent en spesifikk bruker (bruk din egen e-post)
-$bruker = Get-MgUser -UserId "ivar.martinsen@NTNU961.onmicrosoft.com"
+# Hent bruker og lagre i variabel
+$minBruker = Get-MgUser -UserId "ivar.martinsen@NTNU961.onmicrosoft.com" -Property UserPrincipalName,Department,DisplayName,JobTitle 
 
-# Vis informasjon
-Write-Host "Navn: $($bruker.DisplayName)"
-Write-Host "E-post: $($bruker.UserPrincipalName)"
-Write-Host "Jobb: $($bruker.JobTitle)"
+# Bruk variabelen senere
+$navn = $minBruker.DisplayName
+$epost = $minBruker.UserPrincipalName
+$avdeling = $minBruker.Department
+
+Write-Host "=== Min informasjon ==="
+Write-Host "Navn: $navn"
+Write-Host "E-post: $epost"
+Write-Host "Avdeling: $avdeling"
