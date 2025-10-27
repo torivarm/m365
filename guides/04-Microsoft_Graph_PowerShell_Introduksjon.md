@@ -295,7 +295,7 @@ foreach ($bruker in $brukere) {
 Connect-MgGraph -Scopes "User.Read.All"
 
 # Hent alle brukere (eller bruk -Top for testing)
-$brukere = Get-MgUser -Top 50
+$brukere = Get-MgUser -Top 50 -Property Department,UserPrincipalName
 
 # Opprett en hashtable for telling
 $avdelinger = @{}
