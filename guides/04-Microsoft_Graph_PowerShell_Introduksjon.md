@@ -653,7 +653,7 @@ function Get-BrukerStatistikk {
         }
         
         Write-Host "Henter $AntallBrukere brukere..." -ForegroundColor Cyan
-        $brukere = Get-MgUser -Top $AntallBrukere
+        $brukere = Get-MgUser -Top $AntallBrukere -Property DisplayName,UserPrincipalName,AssignedLicenses,JobTitle,Department
         
         # Variabler for statistikk
         $stats = @{

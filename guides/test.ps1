@@ -1,38 +1,25 @@
-# Vis medlemmer i en gruppe
-Connect-MgGraph -Scopes "Group.Read.All", "GroupMember.Read.All"
+# Enkel lisensoversikt
+Connect-MgGraph -Scopes "User.Read.All"
 
-# Hent alle grupper
-$grupper = Get-MgGroup -Top 10
+Write-Host "=== LISENS STATUS ===" -ForegroundColor Cyan
 
-Write-Host "=== TILGJENGELIGE GRUPPER ===" -ForegroundColor Cyan
-for ($i = 0; $i -lt $grupper.Count; $i++) {
-    Write-Host "$($i+1). $($grupper[$i].DisplayName)"
-}
+$brukere = Get-MgUser -Top 20 -Property DisplayName,UserPrincipalName,AssignedLicenses
 
-$valg = Read-Host "`nVelg gruppe (nummer)"
+$medLisens = 0
+$utenLisens = 0
 
-if ($valg -match '^\d+$' -and [int]$valg -le $grupper.Count -and [int]$valg -gt 0) {
-    $gruppe = $grupper[[int]$valg - 1]
-    
-    Write-Host "`n=== $($gruppe.DisplayName) ===" -ForegroundColor Green
-    
-    try {
-        $medlemmer = Get-MgGroupMember -GroupId $gruppe.Id
-        
-        if ($medlemmer) {
-            Write-Host "Medlemmer ($($medlemmer.Count)):"
-            foreach ($medlem in $medlemmer) {
-                $bruker = Get-MgUser -UserId $medlem.Id
-                Write-Host "  👤 $($bruker.DisplayName) - $($bruker.UserPrincipalName)"
-            }
-        }
-        else {
-            Write-Host "Ingen medlemmer i gruppen"
-        }
+foreach ($bruker in $brukere) {
+    if ($bruker.AssignedLicenses.Count -gt 0) {
+        $medLisens++
     }
-    catch {
-        Write-Host "Kunne ikke hente medlemmer: $($_.Exception.Message)" -ForegroundColor Red
+    else {
+        $utenLisens++
+        Write-Host "⚠️  $($bruker.DisplayName) - Ingen lisens" -ForegroundColor Yellow
     }
 }
+
+Write-Host "`nOppsummering:"
+Write-Host "Med lisens: $medLisens" -ForegroundColor Green
+Write-Host "Uten lisens: $utenLisens" -ForegroundColor Red
 
 Disconnect-MgGraph
