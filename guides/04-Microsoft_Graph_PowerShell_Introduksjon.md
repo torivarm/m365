@@ -615,7 +615,7 @@ Connect-MgGraph -Scopes "User.Read.All"
 
 Write-Host "=== LISENS STATUS ===" -ForegroundColor Cyan
 
-$brukere = Get-MgUser -Top 20
+$brukere = Get-MgUser -Top 20 -Property DisplayName,UserPrincipalName,AssignedLicenses
 
 $medLisens = 0
 $utenLisens = 0

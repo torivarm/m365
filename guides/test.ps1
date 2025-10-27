@@ -1,27 +1,37 @@
-# Lag en enkel rapport over brukere
-Connect-MgGraph -Scopes "User.Read.All"
+# Vis medlemmer i en gruppe
+Connect-MgGraph -Scopes "Group.Read.All", "GroupMember.Read.All"
 
-Write-Host "=== BRUKERRAPPORT ===" -ForegroundColor Cyan
-Write-Host "Generert: $(Get-Date -Format 'dd.MM.yyyy HH:mm')`n"
+# Hent alle grupper
+$grupper = Get-MgGroup -Top 10
 
-# Hent brukere
-$brukere = Get-MgUser -Top 20 -Property UserPrincipalName,DisplayName,AccountEnabled,Department
+Write-Host "=== TILGJENGELIGE GRUPPER ===" -ForegroundColor Cyan
+for ($i = 0; $i -lt $grupper.Count; $i++) {
+    Write-Host "$($i+1). $($grupper[$i].DisplayName)"
+}
 
-# Statistikk
-$totalt = $brukere.Count
-$aktive = ($brukere | Where-Object {$_.AccountEnabled -eq $true}).Count
-$inaktive = $totalt - $aktive
+$valg = Read-Host "`nVelg gruppe (nummer)"
 
-Write-Host "Total brukere: $totalt"
-Write-Host "Aktive: $aktive" -ForegroundColor Green
-Write-Host "Inaktive: $inaktive" -ForegroundColor Red
-
-# Vis brukere uten avdeling
-$utenAvdeling = $brukere | Where-Object {-not $_.Department}
-if ($utenAvdeling) {
-    Write-Host "`n⚠️  $($utenAvdeling.Count) brukere mangler avdeling:" -ForegroundColor Yellow
-    foreach ($bruker in $utenAvdeling) {
-        Write-Host "  - $($bruker.DisplayName)"
+if ($valg -match '^\d+$' -and [int]$valg -le $grupper.Count -and [int]$valg -gt 0) {
+    $gruppe = $grupper[[int]$valg - 1]
+    
+    Write-Host "`n=== $($gruppe.DisplayName) ===" -ForegroundColor Green
+    
+    try {
+        $medlemmer = Get-MgGroupMember -GroupId $gruppe.Id
+        
+        if ($medlemmer) {
+            Write-Host "Medlemmer ($($medlemmer.Count)):"
+            foreach ($medlem in $medlemmer) {
+                $bruker = Get-MgUser -UserId $medlem.Id
+                Write-Host "  👤 $($bruker.DisplayName) - $($bruker.UserPrincipalName)"
+            }
+        }
+        else {
+            Write-Host "Ingen medlemmer i gruppen"
+        }
+    }
+    catch {
+        Write-Host "Kunne ikke hente medlemmer: $($_.Exception.Message)" -ForegroundColor Red
     }
 }
 
