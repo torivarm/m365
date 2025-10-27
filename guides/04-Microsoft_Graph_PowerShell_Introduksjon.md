@@ -431,6 +431,7 @@ function Get-GruppeInfo {
 
 # Bruk funksjonen
 Connect-MgGraph -Scopes "Group.Read.All", "GroupMember.Read.All"
+# Skriv Get-MgGroup for å liste ut alle grupper
 Get-GruppeInfo -GruppeNavn "IT-team" -VisMedlemmer
 ```
 

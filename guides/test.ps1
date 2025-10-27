@@ -1,24 +1,33 @@
-function Get-BrukerInfo {
+function Get-GruppeInfo {
     param(
         [Parameter(Mandatory=$true)]
-        [string]$Epost
+        [string]$GruppeNavn,
+        
+        [switch]$VisMedlemmer
     )
     
-    try {
-        $bruker = Get-MgUser -UserId $Epost -Property DisplayName,UserPrincipalName,JobTitle,Department,AccountEnabled
-        
-        Write-Host "=== Brukerinformasjon ==="
-        Write-Host "Navn: $($bruker.DisplayName)"
-        Write-Host "E-post: $($bruker.UserPrincipalName)"
-        Write-Host "Jobbtittel: $($bruker.JobTitle)"
-        Write-Host "Avdeling: $($bruker.Department)"
-        Write-Host "Konto aktiv: $($bruker.AccountEnabled)"
+    # Finn gruppe
+    $gruppe = Get-MgGroup -Filter "displayName eq '$GruppeNavn'"
+    
+    if (-not $gruppe) {
+        Write-Host "Fant ikke gruppe: $GruppeNavn" -ForegroundColor Red
+        return
     }
-    catch {
-        Write-Host "❌ Kunne ikke hente bruker: $($_.Exception.Message)" -ForegroundColor Red
+    
+    Write-Host "Gruppe: $($gruppe.DisplayName)"
+    Write-Host "Beskrivelse: $($gruppe.Description)"
+    
+    if ($VisMedlemmer) {
+        Write-Host "`nMedlemmer:"
+        $medlemmer = Get-MgGroupMember -GroupId $gruppe.Id
+        foreach ($medlem in $medlemmer) {
+            $bruker = Get-MgUser -UserId $medlem.Id
+            Write-Host "  - $($bruker.DisplayName)"
+        }
     }
 }
 
 # Bruk funksjonen
-Connect-MgGraph -Scopes "User.Read.All"
-Get-BrukerInfo -Epost "me"
+Connect-MgGraph -Scopes "Group.Read.All", "GroupMember.Read.All"
+# 
+Get-GruppeInfo -GruppeNavn "IT-team" -VisMedlemmer
