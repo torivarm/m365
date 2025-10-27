@@ -153,14 +153,14 @@ if ($dageSidenInnlogging.Days -gt 90) {
 # check-user-status.ps1
 # Sjekk og håndter brukerstatus i EntraID
 
-Connect-MgGraph -Scopes "User.Read.All", "User.Update.All"
+Connect-MgGraph -Scopes "User.Read.All", "User.Update.All", "User.ReadWrite.All", "AuditLog.Read.All"
 
 function Test-BrukerStatus {
     param(
         [string]$UserPrincipalName
     )
     
-    $bruker = Get-MgUser -UserId $UserPrincipalName -Property DisplayName,AccountEnabled,LastPasswordChangeDateTime,SignInActivity
+    $bruker = Get-MgUser -Filter "userPrincipalName eq '$UserPrincipalName'" -Property DisplayName,AccountEnabled,LastPasswordChangeDateTime,SignInActivity
     
     if ($null -eq $bruker) {
         Write-Host "❌ Bruker ikke funnet" -ForegroundColor Red
@@ -195,7 +195,6 @@ function Test-BrukerStatus {
 # Test funksjonen
 Test-BrukerStatus -UserPrincipalName "test@bedrift.no"
 
-Disconnect-MgGraph
 ```
 
 ### 🔧 Switch-setninger
